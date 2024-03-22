@@ -2,10 +2,10 @@ import { IsString, IsOptional } from 'class-validator';
 
 export class Address {
   @IsString()
-  public zipCode!: string;
+  public zipCode: string;
 
   @IsString()
-  public street?: string;
+  public street: string;
 
   @IsString()
   public number: string;
