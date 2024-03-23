@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { plainToClass } from 'class-transformer';
-import { Address } from '../../../src/entities/address.entity';
-import { Person } from '../../../src/entities/person.entity';
+import { Address } from '../../../src/entities/address';
+import { Person } from '../../../src/entities/person';
 import { PersonType } from '../../../src/entities/enums/personType';
 
 const mockAddress: Address = {

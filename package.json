@@ -9,7 +9,7 @@
     "lint:fix": "eslint --fix --ext .js,.mjs,.ts,.json && prettier . --write",
     "prepare": "husky",
     "commit": "npx cz",
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "lint-staged": {
     "*.ts": "npm run lint:fix"
@@ -24,7 +24,9 @@
     "inversify": "^6.0.2",
     "inversify-express-utils": "^6.4.6",
     "morgan": "^1.10.0",
-    "reflect-metadata": "^0.2.1"
+    "mysql": "^2.18.1",
+    "reflect-metadata": "^0.2.1",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.1",
@@ -51,7 +53,7 @@
     "prettier": "^3.2.5",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2",
-    "ts-node-dev": "^1.1.8",
+    "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^3.12.0",
     "typescript": "^5.0.4"
   },

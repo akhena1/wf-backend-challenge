@@ -1,9 +1,22 @@
 import { Container } from 'inversify';
-import { CreatePerson } from './usecases/createPerson/createPerson';
+import { CreatePersonUseCase } from './usecases/createPerson/createPerson';
 import { PersonController } from './adapters/api/controllers/person/personController';
+import * as Types from './types';
+import { DBConnectionManager } from './adapters/database/connectionManager';
 
 const container = new Container();
-container.bind<PersonController>(PersonController).toSelf();
-container.bind<CreatePerson>(CreatePerson).toSelf();
+
+// Controllers
+container.bind<PersonController>(Types.PersonController).to(PersonController);
+
+// UseCases
+container
+  .bind<CreatePersonUseCase>(Types.CreatePersonUseCase)
+  .to(CreatePersonUseCase);
+
+// Config
+container
+  .bind<DBConnectionManager>(Types.DBConnectionManager)
+  .to(DBConnectionManager);
 
 export default container;

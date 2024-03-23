@@ -1,5 +1,5 @@
 import { Transform, Type } from 'class-transformer';
-import { Address } from './address.entity';
+import { Address } from './address';
 import { PersonType } from './enums/personType';
 import {
   IsString,
@@ -15,8 +15,6 @@ import {
 } from 'class-validator';
 
 export class Person {
-  public personId?: number;
-
   @IsEnum(PersonType)
   public personType: PersonType;
 

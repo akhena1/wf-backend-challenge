@@ -1,5 +1,5 @@
 import { plainToClass } from 'class-transformer';
-import { Address } from '../../../src/entities/address.entity';
+import { Address } from '../../../src/entities/address';
 
 describe('Entities', () => {
   describe('Address', () => {
