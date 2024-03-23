@@ -1,6 +1,6 @@
 import { Transform, Type } from 'class-transformer';
 import { Address } from './address';
-import { PersonType } from './enums/personType';
+import { PersonType } from '../enums/personType';
 import {
   IsString,
   IsPhoneNumber,
@@ -12,6 +12,7 @@ import {
   ValidateNested,
   IsEnum,
   Length,
+  validate,
 } from 'class-validator';
 
 export class Person {
@@ -49,4 +50,11 @@ export class Person {
   @IsInstance(Address)
   @Type((): Function => Address)
   public address: Address | null;
+
+  public async validateSchema(): Promise<string[]> {
+    const schemaValidation = await validate(this);
+    const errors = schemaValidation.map((item) => item.toString());
+
+    return errors;
+  }
 }

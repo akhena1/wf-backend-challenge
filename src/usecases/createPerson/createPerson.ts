@@ -3,7 +3,9 @@ import { PersonEntity } from '../../adapters/database/entities/person.entity';
 import * as Types from '../../types';
 import { DBConnectionManager } from '../../adapters/database/connectionManager';
 import { plainToClass } from 'class-transformer';
-import { Person } from '../../entities/person';
+import { Person } from '../../domain/entities/person';
+import { HttpResponseResult } from '../../domain/http/httpResponseResult';
+import { HttpStatusCode } from '../../domain/enums/httpStatusCode';
 
 @injectable()
 export class CreatePersonUseCase {
@@ -11,17 +13,33 @@ export class CreatePersonUseCase {
     @inject(Types.DBConnectionManager) private dataSource: DBConnectionManager,
   ) {}
 
-  async createPerson(payload: Person) {
+  async createPerson(payload: Person): Promise<HttpResponseResult> {
     try {
-      const data = plainToClass(PersonEntity, payload);
+      const personObj = plainToClass(Person, payload);
+      const validationError = await personObj.validateSchema();
 
+      if (validationError.length > 0) {
+        return new HttpResponseResult(
+          `Invalid Schema: ${validationError}`,
+          HttpStatusCode.BAD_REQUEST_ERROR,
+        );
+      }
+
+      const personEntity = plainToClass(PersonEntity, personObj);
       const db = await this.dataSource.connect();
-      const response = await db?.manager.save(PersonEntity, data);
-      console.log('PAYLOAD  ==========>', response);
-      return { message: response };
+      const response = await db?.manager.save(PersonEntity, personEntity);
+
+      return new HttpResponseResult(
+        `Created`,
+        HttpStatusCode.CREATED,
+        response,
+      );
     } catch (error) {
       console.log(error);
-      return error;
+      return new HttpResponseResult(
+        `Internal Error: ${error}`,
+        HttpStatusCode.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }
