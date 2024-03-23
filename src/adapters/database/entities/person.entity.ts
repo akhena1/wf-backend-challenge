@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { AddressEntity } from './address.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'person' })
 export class PersonEntity {
@@ -36,7 +29,24 @@ export class PersonEntity {
   @Column({ type: 'boolean' })
   public termsAccept: boolean;
 
-  @OneToOne(() => AddressEntity, (entity) => entity.id, { cascade: true })
-  @JoinColumn({ name: 'address' })
-  public address: AddressEntity;
+  @Column({ type: 'varchar' })
+  public zipCode: string;
+
+  @Column({ type: 'varchar' })
+  public street: string;
+
+  @Column({ type: 'varchar' })
+  public number: string;
+
+  @Column({ type: 'varchar' })
+  public city: string;
+
+  @Column({ type: 'varchar' })
+  public neighborhood: string;
+
+  @Column({ type: 'varchar' })
+  public state: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  public complement?: string;
 }

@@ -1,13 +1,13 @@
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { PersonEntity } from './entities/person.entity';
-import { AddressEntity } from './entities/address.entity';
 
 import { injectable } from 'inversify';
+import { IDatabaseConnection } from '../../domain/interfaces/IDatabaseConnection';
 
 @injectable()
-class DBConnectionManager {
-  async connect() {
+export class DBConnectionManager implements IDatabaseConnection {
+  async connect(): Promise<DataSource | void> {
     try {
       return new DataSource({
         type: 'mysql',
@@ -18,7 +18,7 @@ class DBConnectionManager {
         database: process.env.MYSQLDB_NAME,
         synchronize: true,
         logging: ['error', 'warn'],
-        entities: [PersonEntity, AddressEntity],
+        entities: [PersonEntity],
         subscribers: [],
         migrations: [],
       }).initialize();
@@ -27,5 +27,3 @@ class DBConnectionManager {
     }
   }
 }
-
-export { DBConnectionManager };

@@ -1,18 +1,7 @@
 import 'reflect-metadata';
 import { plainToClass } from 'class-transformer';
-import { Address } from '../../../src/domain/entities/address';
-import { Person } from '../../../src/domain/entities/person';
-import { PersonType } from '../../../src/domain/enums/personType';
-
-const mockAddress: Address = {
-  zipCode: '76963-732',
-  street: 'Avenida Cuiabá',
-  number: '387',
-  complement: 'Ao lado do mercado',
-  city: 'Cacoal',
-  neighborhood: 'Centro',
-  state: 'RO',
-};
+import { Person } from '../../../../src/domain/entities/person';
+import { PersonType } from '../../../../src/domain/enums/personType';
 
 describe('Entities', () => {
   describe('Person', () => {
@@ -27,7 +16,13 @@ describe('Entities', () => {
         cellPhone: '1114721459',
         email: 'kaue.tiago.rezende@nextel.com.br',
         termsAccept: true,
-        address: mockAddress,
+        zipCode: '76963-732',
+        street: 'Avenida Cuiabá',
+        number: '387',
+        complement: 'Ao lado do mercado',
+        city: 'Cacoal',
+        neighborhood: 'Centro',
+        state: 'RO',
       };
 
       // When
@@ -49,7 +44,13 @@ describe('Entities', () => {
         cellPhone: '1114721459',
         email: 'kaue.tiago.rezende@nextel.com.br',
         termsAccept: true,
-        address: mockAddress,
+        zipCode: '76963-732',
+        street: 'Avenida Cuiabá',
+        number: '387',
+        complement: 'Ao lado do mercado',
+        city: 'Cacoal',
+        neighborhood: 'Centro',
+        state: 'RO',
       };
 
       const expectCpfResponse = obj.cpf.replace(/[^0-9]/g, '').trim();
@@ -63,16 +64,6 @@ describe('Entities', () => {
 
     it('Should clean special characters of CNPJ field when instance of Person Entity is created', () => {
       // Given
-      const address: Address = {
-        zipCode: '76963-732',
-        street: 'Avenida Cuiabá',
-        number: '387',
-        complement: 'Ao lado do mercado',
-        city: 'Cacoal',
-        neighborhood: 'Centro',
-        state: 'RO',
-      };
-
       const obj = {
         personType: PersonType.LEGAL_PERSON,
         cnpj: '49.445.044/0001-14',
@@ -82,7 +73,13 @@ describe('Entities', () => {
         cellPhone: '1114721459',
         email: 'kaue.tiago.rezende@nextel.com.br',
         termsAccept: true,
-        address,
+        zipCode: '76963-732',
+        street: 'Avenida Cuiabá',
+        number: '387',
+        complement: 'Ao lado do mercado',
+        city: 'Cacoal',
+        neighborhood: 'Centro',
+        state: 'RO',
       };
 
       const expectCnpjResponse = obj.cnpj?.replace(/[^0-9]/g, '').trim();
@@ -93,19 +90,10 @@ describe('Entities', () => {
       // Then
       expect(instance.cnpj).toEqual(expectCnpjResponse);
     });
+
     describe('validationSchema()', () => {
       it('Should return error when any property NOT pass validation', async () => {
         // Given
-        const address: Address = {
-          zipCode: '76963-732',
-          street: 'Avenida Cuiabá',
-          number: '387',
-          complement: 'Ao lado do mercado',
-          city: 'Cacoal',
-          neighborhood: 'Centro',
-          state: 'RO',
-        };
-
         const obj = {
           personType: PersonType.LEGAL_PERSON,
           cnpj: '49.445.044/0001-14',
@@ -115,7 +103,13 @@ describe('Entities', () => {
           cellPhone: '1114721459',
           email: 'kaue.tiago.rezende@nextel.com.br',
           termsAccept: true,
-          address,
+          zipCode: '76963-732',
+          street: 'Avenida Cuiabá',
+          number: '387',
+          complement: 'Ao lado do mercado',
+          city: 'Cacoal',
+          neighborhood: 'Centro',
+          state: 'RO',
         };
 
         // When
@@ -128,16 +122,6 @@ describe('Entities', () => {
 
       it('Should return error when any required property is null or undefined', async () => {
         // Given
-        const address: Address = {
-          zipCode: '76963-732',
-          street: 'Avenida Cuiabá',
-          number: '387',
-          complement: 'Ao lado do mercado',
-          city: 'Cacoal',
-          neighborhood: 'Centro',
-          state: 'RO',
-        };
-
         const obj = {
           personType: PersonType.LEGAL_PERSON,
           name: 'Kauê Tiago Davi Rezende',
@@ -145,7 +129,13 @@ describe('Entities', () => {
           cellPhone: '1114721459',
           email: 'kaue.tiago.rezende@nextel.com.br',
           termsAccept: true,
-          address,
+          zipCode: '76963-732',
+          street: 'Avenida Cuiabá',
+          number: '387',
+          complement: 'Ao lado do mercado',
+          city: 'Cacoal',
+          neighborhood: 'Centro',
+          state: 'RO',
         };
 
         // When

@@ -1,5 +1,4 @@
-import { Transform, Type } from 'class-transformer';
-import { Address } from './address';
+import { Transform } from 'class-transformer';
 import { PersonType } from '../enums/personType';
 import {
   IsString,
@@ -46,10 +45,27 @@ export class Person {
   @IsBoolean()
   public termsAccept: boolean;
 
-  @ValidateNested()
-  @IsInstance(Address)
-  @Type((): Function => Address)
-  public address: Address | null;
+  @IsString()
+  public zipCode: string;
+
+  @IsString()
+  public street: string;
+
+  @IsString()
+  public number: string;
+
+  @IsString()
+  @IsOptional()
+  public complement?: string;
+
+  @IsString()
+  public city: string;
+
+  @IsString()
+  public neighborhood: string;
+
+  @IsString()
+  public state: string;
 
   public async validateSchema(): Promise<string[]> {
     const schemaValidation = await validate(this);

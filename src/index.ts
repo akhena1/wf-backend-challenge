@@ -22,5 +22,5 @@ server.setConfig((app) => {
 });
 
 server.build().listen(PORT, () => {
-  console.log(`Escutando na porta ${PORT}`);
+  console.log(`Listening at port: ${PORT}`);
 });
