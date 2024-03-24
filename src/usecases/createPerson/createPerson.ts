@@ -72,6 +72,17 @@ export class CreatePersonUseCase {
         );
       }
 
+      if (person.termsAccept === false) {
+        this.logger.info(
+          payload,
+          'Invalid request - The terms should be accepted',
+        );
+        return new HttpResponseResult(
+          `Person should accept terms and conditions`,
+          HttpStatusCode.BAD_REQUEST_ERROR,
+        );
+      }
+
       const dataSource = await this.dataSource.initialize();
 
       const personExists = await dataSource?.manager.find(PersonEntity, {
