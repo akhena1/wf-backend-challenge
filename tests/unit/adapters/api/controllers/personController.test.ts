@@ -4,6 +4,7 @@ import { Container } from 'inversify';
 import * as Types from '../../../../../src/types';
 import httpMocks from 'node-mocks-http';
 import { HttpResponseResult } from '../../../../../src/domain/http/httpResponseResult';
+import { Logger } from '../../../../../src/adapters/logger/logger';
 
 const createInstance = (
   useCaseMock?: CallableFunction | object,
@@ -11,6 +12,7 @@ const createInstance = (
   const container = new Container();
 
   container.bind(Types.CreatePersonUseCase).toConstantValue(useCaseMock);
+  container.bind(Types.Logger).to(Logger);
   container.bind(Types.PersonController).to(PersonController);
 
   return container.get(Types.PersonController);

@@ -5,6 +5,7 @@ import { CreatePersonUseCase } from '../../../../src/usecases/createPerson/creat
 import { HttpResponseResult } from '../../../../src/domain/http/httpResponseResult';
 import { HttpStatusCode } from '../../../../src/domain/enums/httpStatusCode';
 import { generatePersonFixture } from '../../../utils/fixtures/generatePerson';
+import { Logger } from '../../../../src/adapters/logger/logger';
 
 const createInstance = (
   dbConnectionManagerMock?: object,
@@ -14,6 +15,8 @@ const createInstance = (
   container
     .bind(Types.DBConnectionManager)
     .toConstantValue(dbConnectionManagerMock);
+
+  container.bind(Types.Logger).to(Logger);
   container.bind(Types.CreatePersonUseCase).to(CreatePersonUseCase);
 
   return container.get(Types.CreatePersonUseCase);
