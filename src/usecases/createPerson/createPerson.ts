@@ -15,9 +15,19 @@ export class CreatePersonUseCase {
     @inject(Types.DBConnectionManager) private dataSource: IDatabaseConnection,
   ) {}
 
-  async execute(payload: Person): Promise<HttpResponseResult> {
+  async execute(payload: Partial<Person>): Promise<HttpResponseResult> {
     try {
       const person = plainToClass(Person, payload);
+
+      const validationError = await person.validateSchema();
+
+      if (validationError.length > 0) {
+        return new HttpResponseResult(
+          `Invalid Fields`,
+          HttpStatusCode.BAD_REQUEST_ERROR,
+          { errors: validationError },
+        );
+      }
 
       if (person.cnpj && !cnpj.isValid(person.cnpj)) {
         return new HttpResponseResult(
@@ -47,18 +57,9 @@ export class CreatePersonUseCase {
         );
       }
 
-      const validationError = await person.validateSchema();
+      const dataSource = await this.dataSource.initialize();
 
-      if (validationError.length > 0) {
-        return new HttpResponseResult(
-          `${validationError}`,
-          HttpStatusCode.BAD_REQUEST_ERROR,
-        );
-      }
-
-      const db = await this.dataSource.connect();
-
-      const personExists = await db?.manager.find(PersonEntity, {
+      const personExists = await dataSource?.manager.find(PersonEntity, {
         where: {
           cpf: person.cpf,
           personType: person.personType,
@@ -72,7 +73,7 @@ export class CreatePersonUseCase {
         );
       }
 
-      await db?.manager.save(PersonEntity, person);
+      await dataSource?.manager.save(PersonEntity, person);
 
       return new HttpResponseResult(`Created`, HttpStatusCode.CREATED);
     } catch (error) {

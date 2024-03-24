@@ -7,7 +7,7 @@ import { IDatabaseConnection } from '../../domain/interfaces/IDatabaseConnection
 
 @injectable()
 export class DBConnectionManager implements IDatabaseConnection {
-  async connect(): Promise<DataSource | void> {
+  async initialize(): Promise<DataSource | void> {
     try {
       return new DataSource({
         type: 'mysql',
