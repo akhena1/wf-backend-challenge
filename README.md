@@ -1,19 +1,95 @@
 ## Backend - Wefit
 
-Seja bem vindo ao teste de backend da Wefit.
+Entrega - Teste de backend da Wefit
 
-### Para iniciar o banco de dados é necessario ter o docker-compose instalado em sua máquina e rodar o seguinte comando:
+### Para iniciar a aplicação, você deve ter instalado:
+ - Node.js & npm
+ - Docker
 
-    docker-compose up -D
+### Instale as dependencias
+```
+npm i
+```
 
-o docker-compose vai criar um container de um MySQL e você poderá acessar via localhost:3306 e a senha do usuário **root** é **senha_root_123**
+### Suba a instancia do Banco de Dados
+```
+docker-compose up -d
+```
 
-### Para iniciar o servidor express basta executar o seguinte comando:
+### Suba o servidor
+```
+npm run dev
+```
 
-    npm start
-    ou
-    yarn start
+### Para executar os testes de unidade:
+```
+npm test
+```
 
-Depois que concluir seu teste não de enviar o seu código junto a pasta data, nela está salvo o volume do MySQL criado pelo docker.
+### Para fazer um novo commit dentro dos padrões do conventional commits:
+```
+npm run commit
+```
 
-Boa sorte =)
+### Para revisar code style e corrigir identação
+```
+npm run lint:fix
+```
+
+# Sobre a entrega
+
+### O TypeOrm esta com a opção `synchronize` setada como `true`, então toda a estrutura do banco será criada automaticamente quando qualquer endpoint rodar. Como se trata apenas de um teste que não vai pra produção, optei por não implementar as migrations.
+
+### A arquitetura foi pensada para que o domínio da aplicação fique minimamente acoplado a dependencias externas, dentro do possível, por isso a utilização do container de IoC. Numa situação real normalmente eu optaria por utilizar o Nest.js, já que ele trás abstrações que em muitas situações facilita o dia a dia, mas quis mostrar um pouco da minha bagagem e não me prender a um framework especifico.
+
+### As validações da regra de negócio durante o cadastro foram pensadas de maneira arbitrária, mas os testes unitários do caso de uso estão descrevendo bem como estruturei, então imagino que sejam suficientes como _**documentação do processo**_.
+
+# Chamadas para o endpoint:
+### CURL para cadastro de vendedor
+```sh
+curl --location 'localhost:4568/api/person/create' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "personType": "2",
+    "cnpj": "57.240.262/0001-40",
+    "cpf": "825.186.670-75",
+    "name": "Kauê Tiago Davi Rezende",
+    "phone": "(69) 2847-9557",
+    "cellPhone": "1114721459",
+    "email": "kaue.tiago.rezende@nextel.com.br",
+    "termsAccept": true,
+    "zipCode": "76963-732",
+    "street": "Avenida Cuiabá",
+    "number": "387",
+    "complement": "Ao lado do mercado",
+    "city": "Cacoal",
+    "neighborhood": "Centro",
+    "state": "RO"
+}'
+```
+
+### CURL para cadastro de comprador
+```sh
+curl --location 'localhost:4568/api/person/create' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "personType": "1",
+    "cpf": "825.186.670-75",
+    "name": "Kauê Tiago Davi Rezende",
+    "phone": "(69) 2847-9557",
+    "cellPhone": "1114721459",
+    "email": "kaue.tiago.rezende@nextel.com.br",
+    "termsAccept": true,
+    "zipCode": "76963-732",
+    "street": "Avenida Cuiabá",
+    "number": "387",
+    "complement": "Ao lado do mercado",
+    "city": "Cacoal",
+    "neighborhood": "Centro",
+    "state": "RO"
+}'
+```
+
+###  ***dados retirados de [4devs.com](https://www.4devs.com.br/)**
+
+
