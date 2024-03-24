@@ -32,6 +32,8 @@ paths:
                 $ref: '#/components/schemas/Person'
         '400':
           description: Bad Request - Some fields is invalid
+        '401':
+          description: Invalid or undefined authorization header
         '409':
           description: Conflict - Person already exists
         '500':
