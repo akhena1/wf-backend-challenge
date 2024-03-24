@@ -17,7 +17,7 @@ export class PersonEntity {
   @Column({ type: 'varchar' })
   public name: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   public phone?: string;
 
   @Column({ type: 'varchar' })
