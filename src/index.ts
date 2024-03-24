@@ -6,7 +6,6 @@ import container from './container';
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
-
 import morgan from 'morgan';
 
 const PORT = process.env.APP_PORT || 4568;

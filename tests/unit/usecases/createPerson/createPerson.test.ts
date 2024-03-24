@@ -4,7 +4,6 @@ import { PersonType } from '../../../../src/domain/enums/personType';
 import { CreatePersonUseCase } from '../../../../src/usecases/createPerson/createPerson';
 import { HttpResponseResult } from '../../../../src/domain/http/httpResponseResult';
 import { HttpStatusCode } from '../../../../src/domain/enums/httpStatusCode';
-import { Person } from '../../../../src/domain/entities/person';
 import { generatePersonFixture } from '../../../utils/fixtures/generatePerson';
 
 const createInstance = (
