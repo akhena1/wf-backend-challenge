@@ -3,6 +3,7 @@ import { CreatePersonUseCase } from './usecases/createPerson/createPerson';
 import { PersonController } from './adapters/api/controllers/person/personController';
 import * as Types from './types';
 import { DBConnectionManager } from './adapters/database/connectionManager';
+import { Logger } from './adapters/logger/logger';
 
 const container = new Container();
 
@@ -18,5 +19,6 @@ container
 container
   .bind<DBConnectionManager>(Types.DBConnectionManager)
   .to(DBConnectionManager);
+container.bind<Logger>(Types.Logger).to(Logger);
 
 export default container;

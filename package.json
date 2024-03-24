@@ -24,8 +24,8 @@
     "helmet": "^7.1.0",
     "inversify": "^6.0.2",
     "inversify-express-utils": "^6.4.6",
-    "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "pino": "^8.19.0",
     "reflect-metadata": "^0.2.1",
     "typeorm": "^0.3.20"
   },
