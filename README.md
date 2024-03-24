@@ -3,35 +3,42 @@
 Entrega - Teste de backend da Wefit
 
 ### Para iniciar a aplicação, você deve ter instalado:
- - Node.js & npm
- - Docker
+
+- Node.js & npm
+- Docker
 
 ### Instale as dependencias
+
 ```
 npm i
 ```
 
 ### Suba a instancia do Banco de Dados
+
 ```
 docker-compose up -d
 ```
 
 ### Suba o servidor
+
 ```
 npm run dev
 ```
 
 ### Para executar os testes de unidade:
+
 ```
 npm test
 ```
 
 ### Para fazer um novo commit dentro dos padrões do conventional commits:
+
 ```
 npm run commit
 ```
 
 ### Para revisar code style e corrigir identação
+
 ```
 npm run lint:fix
 ```
@@ -45,7 +52,9 @@ npm run lint:fix
 ### As validações da regra de negócio durante o cadastro foram pensadas de maneira arbitrária, mas os testes unitários do caso de uso estão descrevendo bem como estruturei, então imagino que sejam suficientes como _**documentação do processo**_.
 
 # Chamadas para o endpoint:
+
 ### CURL para cadastro de vendedor
+
 ```sh
 curl --location 'localhost:4568/api/person/create' \
 --header 'Content-Type: application/json' \
@@ -69,6 +78,7 @@ curl --location 'localhost:4568/api/person/create' \
 ```
 
 ### CURL para cadastro de comprador
+
 ```sh
 curl --location 'localhost:4568/api/person/create' \
 --header 'Content-Type: application/json' \
@@ -90,6 +100,4 @@ curl --location 'localhost:4568/api/person/create' \
 }'
 ```
 
-###  ***dados retirados de [4devs.com](https://www.4devs.com.br/)**
-
-
+### **\*dados retirados de [4devs.com](https://www.4devs.com.br/)**

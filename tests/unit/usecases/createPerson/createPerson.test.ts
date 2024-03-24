@@ -122,6 +122,25 @@ describe('UseCases', () => {
       expect(response.statusCode).toBe(expectedResult.statusCode);
     });
 
+    it('Should return an error when person does not accept the terms', async () => {
+      // Given
+      const payload = generatePersonFixture({
+        termsAccept: false,
+      });
+      const useCase = createInstance();
+      const expectedResult = new HttpResponseResult(
+        `Person should accept terms and conditions`,
+        HttpStatusCode.BAD_REQUEST_ERROR,
+      );
+
+      // When
+      const response = await useCase.execute(payload);
+
+      // Then
+      expect(response.message).toBe(expectedResult.message);
+      expect(response.statusCode).toBe(expectedResult.statusCode);
+    });
+
     it('Should return an error if user is already created in database', async () => {
       // Given
       const payload = generatePersonFixture();
