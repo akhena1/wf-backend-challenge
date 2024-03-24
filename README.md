@@ -47,16 +47,17 @@ npm run lint:fix
 
 ### O TypeOrm esta com a opção `synchronize` setada como `true`, então toda a estrutura do banco será criada automaticamente quando qualquer endpoint rodar. Como se trata apenas de um teste que não vai pra produção, optei por não implementar as migrations.
 
-### A arquitetura foi pensada para que o domínio da aplicação fique minimamente acoplado a dependencias externas, dentro do possível, por isso a utilização do container de IoC. Numa situação real normalmente eu optaria por utilizar o Nest.js, já que ele trás abstrações que em muitas situações facilita o dia a dia, mas quis mostrar um pouco da minha bagagem e não me prender a um framework especifico.
+### A arquitetura foi pensada para que o domínio da aplicação fique minimamente acoplado à dependencias externas, dentro do possível. Por isso a utilização do container de IoC. Numa situação real normalmente eu optaria por utilizar o Nest.js já que ele trás abstrações que em muitas situações facilita o dia a dia, mas quis mostrar um pouco da minha bagagem e não me prender a um framework especifico.
 
 ### As validações da regra de negócio durante o cadastro foram pensadas de maneira arbitrária, mas os testes unitários do caso de uso estão descrevendo bem como estruturei, então imagino que sejam suficientes como _**documentação do processo**_.
 
-# Chamadas para o endpoint:
+### A API não esta servindo um endpoint para consultar a documentação diretamente, mas o arquivo swagger esta disponível na pasta **_docs_** na raiz do projeto. Basta copiar o conteúdo do arquivo `wefit-api-swagger.yaml` e colar no [Swagger Editor](https://editor.swagger.io/). Também pode efetuar as chamadas para a API pelo postman ou terminal utilizando as seguintes CURL'S:
 
 ### CURL para cadastro de vendedor
 
 ```sh
 curl --location 'localhost:4568/api/person/create' \
+--header 'x-api-key: CHAVESUPERSECRETAETC' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "personType": "2",
@@ -74,13 +75,13 @@ curl --location 'localhost:4568/api/person/create' \
     "city": "Cacoal",
     "neighborhood": "Centro",
     "state": "RO"
-}'
 ```
 
 ### CURL para cadastro de comprador
 
 ```sh
 curl --location 'localhost:4568/api/person/create' \
+--header 'x-api-key: CHAVESUPERSECRETAETC' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "personType": "1",
